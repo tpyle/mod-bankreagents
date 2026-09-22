@@ -1,0 +1,5 @@
+{
+    "name": "mod-bankreagents",
+    "description": "Pull a recipe's reagents from the bank into the bags on request, so the client will send the craft",
+    "version": "1.0.0"
+}

@@ -1,0 +1,32 @@
+#
+# mod-bankreagents - the server half of crafting from the bank.
+#
+# The client refuses to send a craft unless the reagents are in the bags, and
+# it decides that in the executable, so nothing server side can change it. This
+# module moves a recipe's reagents out of the bank the moment the player
+# selects it in the trade skill window, by the smallest amount that lets a run
+# of crafts proceed. The request arrives from the companion addon
+# (client-patch/addon/BankReagents) over the core's addon command channel.
+#
+
+[worldserver]
+
+#
+#    BankReagents.Enable
+#        Description: Master switch. Off, the command refuses and nothing
+#                     moves; the addon keeps showing bank-inclusive counts but
+#                     crafts need the reagents in the bags the old way.
+#        Default:     1
+
+BankReagents.Enable = 1
+
+#
+#    BankReagents.MinStacks
+#        Description: Full stacks of each reagent to keep in the bags while a
+#                     recipe is selected. One stack is enough for the client's
+#                     check and for a burst of crafts before the next top-up
+#                     (the addon re-requests after every craft). Raising it
+#                     trades bag slots for fewer round trips.
+#        Default:     1
+
+BankReagents.MinStacks = 1
