@@ -37,6 +37,7 @@
  * bags. The recipe must be one the player knows.
  */
 
+#include "BankReagentsMath.h"
 #include "Chat.h"
 #include "CommandScript.h"
 #include "Config.h"
@@ -66,7 +67,7 @@ namespace
     void LoadConfig()
     {
         cfg.Enable    = sConfigMgr->GetOption<bool>("BankReagents.Enable", true);
-        cfg.MinStacks = std::max<uint32>(1, sConfigMgr->GetOption<uint32>("BankReagents.MinStacks", 1));
+        cfg.MinStacks = BankReagentsMath::SaneMinStacks(sConfigMgr->GetOption<uint32>("BankReagents.MinStacks", 1));
     }
 
     // Moves one item from a bank position into the bags, the way the bank
@@ -203,8 +204,8 @@ public:
             // Enough for the craft, and never less than the configured number
             // of full stacks, so a run of crafts does not need a round trip
             // for every single one.
-            uint32 const wanted = std::max<uint32>(uint32(spell->ReagentCount[i]),
-                                                   proto->GetMaxStackSize() * cfg.MinStacks);
+            uint32 const wanted = BankReagentsMath::WantedCount(uint32(spell->ReagentCount[i]),
+                                                               proto->GetMaxStackSize(), cfg.MinStacks);
 
             totalMoved += PullReagent(player, uint32(entry), wanted);
         }
