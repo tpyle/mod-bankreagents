@@ -42,3 +42,8 @@ to be one the caller knows.
   taking an `inBankAlso` flag).
 * The `BankReagents` client addon, which sends the command on recipe
   selection and after each craft.
+
+## Licence
+
+GNU Affero General Public License v3.0, the licence AzerothCore and its
+modules use. See [LICENSE](LICENSE).
